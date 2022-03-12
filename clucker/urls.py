@@ -1,0 +1,33 @@
+"""clucker URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from microblogs import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('feed/', views.FeedView.as_view(), name='feed'),
+    path('follow_toggle/<int:user_id>', views.follow_toggle, name='follow_toggle'),
+    path('log_in/', views.LogInView.as_view(), name='log_in'),
+    path('log_out/', views.log_out, name='log_out'),
+    path('new_post/', views.NewPostView.as_view(), name='new_post'),
+    path('password/', views.PasswordView.as_view(), name='password'),
+    path('profile/', views.ProfileUpdateView.as_view(), name='profile'),
+    path('sign_up/', views.SignUpView.as_view(), name='sign_up'),
+    path('user/<int:user_id>', views.ShowUserView.as_view(), name='show_user'),
+    path('users/', views.UserListView.as_view(), name='user_list'),
+]
